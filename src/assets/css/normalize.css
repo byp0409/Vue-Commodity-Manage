@@ -26,7 +26,7 @@ textarea {
   /* for ie */
   /*font: 12px/1 Tahoma, Helvetica, Arial, "宋体", sans-serif;*/
   /* 'Microsoft YaHei', Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif 用 ascii 字符表示，使得在任何编码下都无问题 */
-  font: 12px/1.3 -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB,
+  font: 13px/1.3 -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB,
     Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji,
     Segoe UI Symbol;
   color: #333;
