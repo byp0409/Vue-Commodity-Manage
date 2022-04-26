@@ -1,6 +1,5 @@
 <template>
   <div class="leftNav">
-    <div class="title">后台易购管理系统</div>
     <el-row class="tac">
       <el-col>
         <el-menu
@@ -10,19 +9,29 @@
           text-color="#fff"
           active-text-color="#289aff"
           router
+          :collapse="iscollapse"
         >
+          <el-menu-item class="title">
+            <span>易购后台管理系统</span>
+          </el-menu-item>
           <el-menu-item index="/home/homePage">
             <i class="el-icon-s-home"></i>
             <span slot="title">首页</span>
           </el-menu-item>
           <el-submenu index="/manage">
             <template slot="title">
-              <i class="el-icon-s-goods"></i>
-              <span>商品管理</span>
+              <i class="el-icon-s-order"></i>
+              <span>订单管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="1-1">订单列表</el-menu-item>
-              <el-menu-item index="1-2">退货管理</el-menu-item>
+              <el-menu-item index="/home/manage/orderList">
+                <i class="el-icon-s-order"></i>
+                <span>订单列表</span>
+              </el-menu-item>
+              <el-menu-item index="/home/manage/returnList">
+                <i class="el-icon-s-order"></i>
+                <span>退货管理</span>
+              </el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-menu-item index="/home/specifications">
@@ -30,12 +39,12 @@
             <span slot="title">规格参数</span>
           </el-menu-item>
           <el-menu-item index="/home/ads">
-            <i class="el-icon-setting"></i>
+            <i class="el-icon-menu"></i>
             <span slot="title">广告分类</span>
           </el-menu-item>
-          <el-menu-item index="/home/userCenter">
-            <i class="el-icon-s-custom"></i>
-            <span slot="title">个人中心</span>
+          <el-menu-item index="/home/Goods">
+            <i class="el-icon-s-goods"></i>
+            <span slot="title">商品管理</span>
           </el-menu-item>
         </el-menu>
       </el-col>
@@ -46,6 +55,18 @@
 <script>
 export default {
   name: 'LeftNav',
+  data() {
+    return {
+      // 控制导航栏伸缩
+      iscollapse: false,
+    };
+  },
+  mounted() {
+    // 接收伸缩导航栏的信号
+    this.$bus.$on('changeCollapse', value => {
+      this.iscollapse = value;
+    });
+  },
 };
 </script>
 
@@ -54,15 +75,26 @@ export default {
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 200px;
+  // 让导航撑开
+  // width: 200px;
   background-color: #304159;
-  .title {
-    margin: 15px 0;
-    font-size: 17px;
-    color: #fff;
-    margin-left: 20px;
-    // text-align: center;
-    cursor: default;
+
+  .el-menu {
+    border-right-width: 0;
+    .title {
+      font-size: 17px;
+      color: #fff;
+      cursor: default !important;
+      pointer-events: none;
+    }
+    // 调整激活时背景颜色
+    .el-menu-item.is-active {
+      background-color: #004079 !important;
+    }
+  }
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
   }
 }
 </style>

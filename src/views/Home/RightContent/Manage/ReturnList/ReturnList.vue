@@ -1,11 +1,10 @@
 <template>
-  <!-- 个人中心 -->
-  <div></div>
+  <div>ReturnList</div>
 </template>
 
 <script>
 export default {
-  name: 'UC',
+  name: 'ReturnList',
 };
 </script>
 

@@ -15,12 +15,23 @@ export default [
         component: () => import('@/views/Home/RightContent/HomePage/HomePage'),
       },
       {
-        // 商品管理
+        // 订单管理
         name: 'manage',
         path: 'manage',
         component: () => import('@/views/Home/RightContent/Manage/Manage'),
         // 二级路由
-        children: [],
+        children: [
+          {
+            name: 'orderList',
+            path: 'orderList',
+            component: () => import('@/views/Home/RightContent/Manage/OrderList/OrderList'),
+          },
+          {
+            name: 'returnList',
+            path: 'returnList',
+            component: () => import('@/views/Home/RightContent/Manage/ReturnList/ReturnList'),
+          },
+        ],
       },
       {
         // 规格参数
@@ -36,9 +47,9 @@ export default [
       },
       {
         // 用户个人中心
-        name: 'userCenter',
-        path: 'userCenter',
-        component: () => import('@/views/Home/RightContent/UC/UC'),
+        name: 'goods',
+        path: 'goods',
+        component: () => import('@/views/Home/RightContent/Goods/Goods'),
       },
     ],
   },
