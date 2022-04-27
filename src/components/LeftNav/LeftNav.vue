@@ -11,7 +11,7 @@
           router
           :collapse="iscollapse"
         >
-          <el-menu-item class="title">
+          <el-menu-item index="/xxxx" class="title">
             <span>易购后台管理系统</span>
           </el-menu-item>
           <el-menu-item index="/home/homePage">
@@ -42,7 +42,7 @@
             <i class="el-icon-menu"></i>
             <span slot="title">广告分类</span>
           </el-menu-item>
-          <el-menu-item index="/home/Goods">
+          <el-menu-item index="/home/goods">
             <i class="el-icon-s-goods"></i>
             <span slot="title">商品管理</span>
           </el-menu-item>
