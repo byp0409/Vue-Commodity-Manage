@@ -46,10 +46,16 @@ export default [
         component: () => import('@/views/Home/RightContent/Ads/Ads'),
       },
       {
-        // 用户个人中心
+        // 商品管理
         name: 'goods',
         path: 'goods',
         component: () => import('@/views/Home/RightContent/Goods/Goods'),
+      },
+      {
+        // 增加商品
+        name: 'addGoods',
+        path: 'addGoods',
+        component: () => import('@/views/Home/RightContent/Goods/AddGoods/AddGoods'),
       },
     ],
   },
