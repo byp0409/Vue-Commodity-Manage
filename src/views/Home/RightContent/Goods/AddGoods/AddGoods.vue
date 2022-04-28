@@ -19,7 +19,10 @@
       >
         <el-form-item label="类目选择" prop="category">
           <!-- 控制弹窗 -->
-          <el-button type="primary" @click="centerDialogVisible = true">类目选择</el-button>
+          <el-button type="primary" @click="centerDialogVisible">类目选择</el-button>
+          <span class="categoryName" v-show="goodsForm.category">
+            类别：{{ goodsForm.category }}
+          </span>
         </el-form-item>
         <el-form-item label="商品ID" prop="id">
           <el-input v-model.number="goodsForm.id"></el-input>
@@ -37,7 +40,7 @@
           <el-input v-model="goodsForm.sellPoint"></el-input>
         </el-form-item>
         <el-form-item label="上传图片" prop="image">
-          <el-button type="primary">上传图片</el-button>
+          <UpLoadImg @getImgUrl="getImgUrl" />
         </el-form-item>
         <el-form-item label="商品描述" prop="desc">
           <el-input type="textarea" v-model="goodsForm.desc"></el-input>
@@ -49,23 +52,19 @@
       </el-form>
     </div>
     <!-- 弹窗组件 -->
-    <el-dialog title="添加商品" :visible.sync="centerDialogVisible" width="30%" center>
-      <span>需要注意的是内容是默认不居中的</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="centerDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
-      </span>
-    </el-dialog>
+    <Category ref="category" @getCategoryName="getCategoryName" />
   </div>
 </template>
 
 <script>
+// 选择类别模块
+import Category from './Category/Category.vue';
+// 上传图片模块
+import UpLoadImg from './UpLoadImg/UpLoadImg.vue';
 export default {
   name: 'AddGoods',
   data() {
     return {
-      // 控制弹框
-      centerDialogVisible: false,
       // 要添加的商品信息
       goodsForm: {
         category: '', //类别
@@ -99,6 +98,20 @@ export default {
     };
   },
   methods: {
+    // 从子组件获取上传图片url的回调
+    getImgUrl(value) {
+      this.goodsForm.image = value;
+      // console.log(this.goodsForm.image);
+    },
+    // 获取类别的自定义事件的回调
+    getCategoryName(value) {
+      this.goodsForm.category = value;
+    },
+    // 展示选择
+    centerDialogVisible() {
+      // 通过ref操作子组件的数据
+      this.$refs.category.centerDialogVisible = true;
+    },
     // 提交
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
@@ -115,6 +128,7 @@ export default {
       this.$refs[formName].resetFields();
     },
   },
+  components: { Category, UpLoadImg },
 };
 </script>
 
@@ -131,5 +145,8 @@ export default {
   margin: 10px 15px 0;
   border-radius: 5px;
   background-color: #fff;
+  .categoryName {
+    margin-left: 70px;
+  }
 }
 </style>

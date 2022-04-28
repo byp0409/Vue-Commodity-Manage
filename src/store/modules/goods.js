@@ -12,6 +12,7 @@ export default {
         return Promise.reject(new Error('请求商品列表错误'));
       }
     },
+    // 搜索
     async search({ commit }, input) {
       let result = await reqSearch(input);
       if (result.data.status == 200) {
