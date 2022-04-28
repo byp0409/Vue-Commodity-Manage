@@ -7,10 +7,9 @@ import store from './store';
 import '@/plugins/element-ui.js';
 
 Vue.config.productionTip = false;
-// // 测试
-// import { reqGoodsList, reqSearch } from '@/api/index';
-// console.log(reqSearch('佳能'));
-
+// 测试
+// import { reqGoodsList, reqSearch, reqCategoryInfo } from '@/api/index';
+// console.log(reqCategoryInfo());
 new Vue({
   router,
   store,
