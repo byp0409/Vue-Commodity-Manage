@@ -52,10 +52,10 @@ export default [
         component: () => import('@/views/Home/RightContent/Goods/Goods'),
       },
       {
-        // 增加商品
-        name: 'addGoods',
-        path: 'addGoods',
-        component: () => import('@/views/Home/RightContent/Goods/AddGoods/AddGoods'),
+        // 增加和修改商品
+        name: 'addEditGoods',
+        path: 'addEditGoods',
+        component: () => import('@/views/Home/RightContent/Goods/AddEidtGoods/AddEditGoods'),
       },
     ],
   },
