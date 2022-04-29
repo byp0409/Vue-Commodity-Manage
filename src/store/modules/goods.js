@@ -1,7 +1,16 @@
-import { reqGoodsList, reqSearch } from '@/api/index';
+import { reqGoodsList, reqSearch, reqAddGoods, reqDelete, modifyGoods } from '@/api/index';
 export default {
   namespaced: true,
   actions: {
+    // 删除商品
+    async deleteGoods({ commit }, id) {
+      let result = await reqDelete(id);
+      if (result.data.status == 200) {
+        return 'ok';
+      } else {
+        return Promise.reject(new Error('删除失败'));
+      }
+    },
     // 请求商品
     async reqGoods({ commit }, page) {
       let result = await reqGoodsList(page);
@@ -23,6 +32,24 @@ export default {
         return '暂无数据';
       } else {
         return Promise.reject(new Error('搜索失败'));
+      }
+    },
+    // 添加商品
+    async addGoods({ commit }, params) {
+      let result = await reqAddGoods(params);
+      if (result.data.status == 200) {
+        return 'ok';
+      } else {
+        return Promise.reject(new Error('添加商品失败'));
+      }
+    },
+    // 添加商品
+    async modifyGoods({ commit }, params) {
+      let result = await modifyGoods(params);
+      if (result.data.status == 200) {
+        return 'ok';
+      } else {
+        return Promise.reject(new Error('修改商品失败'));
       }
     },
   },
