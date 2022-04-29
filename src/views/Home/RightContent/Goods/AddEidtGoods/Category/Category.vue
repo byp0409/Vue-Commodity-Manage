@@ -4,7 +4,7 @@
     <el-dialog title="请选择类目" :visible.sync="centerDialogVisible" width="30%" center>
       <!-- 展示当前选择的类别 -->
       <div class="checked">
-        <span>当前选择的类别：{{ categoryName }}</span>
+        <span>当前选择的类别：{{ category }}</span>
       </div>
       <!-- 类别选择 树形结构 -->
       <el-tree :props="props" :load="loadNode" lazy @node-click="nodeClick"></el-tree>
@@ -20,6 +20,16 @@
 import { reqCategoryInfo } from '@/api/index';
 export default {
   name: 'Category',
+  // props: ['category', 'cid'],
+  props: {
+    category: {
+      type: String,
+      default: '',
+    },
+    cid: {
+      default: '',
+    },
+  },
   data() {
     return {
       // 控制弹框
@@ -32,16 +42,24 @@ export default {
       },
       // 类别
       categoryName: '',
+      // 类别id
+      categoryCid: '',
     };
+  },
+  mounted() {
+    // 赋初值
+    this.categoryName = this.category;
+    this.categoryCid = this.cid;
   },
   methods: {
     // 给父组件类别信息,并修改弹窗显示状态
     sendCategoryName() {
-      this.$emit('getCategoryName', this.categoryName);
+      this.$emit('getCategoryName', this.categoryName, this.categoryCid);
       this.centerDialogVisible = false;
     },
     // 添加选择
     nodeClick(data) {
+      this.categoryCid = data.cid;
       this.categoryName = data.name;
     },
     // 懒加载函数
