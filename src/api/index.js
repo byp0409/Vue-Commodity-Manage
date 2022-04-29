@@ -1,4 +1,5 @@
 import request from './reqinstance';
+
 // 已在代理服务器重写路径，直接用简写
 // 搜索商品列表，get请求 search商品关键字
 export const reqSearch = search =>
@@ -15,3 +16,15 @@ export const reqCategoryInfo = id =>
     method: 'GET',
     params: { id },
   });
+
+// 添加商品
+export const reqAddGoods = params =>
+  request({ url: '/backend/item/insertTbItem', method: 'GET', params }); //params简写，接受前整理好
+
+// 删除商品
+export const reqDelete = id =>
+  request({ url: '/backend/item/deleteItemById', method: 'GET', params: { id } });
+
+// 修改商品信息
+export const modifyGoods = params =>
+  request({ url: '/backend/item/updateTbItem', method: 'GET', params });
