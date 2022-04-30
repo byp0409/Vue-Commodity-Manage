@@ -5,6 +5,47 @@ const sqlFn = require('./mysql');
 //图片需要的模块
 const multer = require('multer');
 const fs = require('fs');
+//导入模块 jsonwebtoken   密钥
+const jwt = require('jsonwebtoken');
+// config.jwtSecert
+const config = require('./secert');
+
+// 登录
+/**
+ * 登录 login
+ * 接受的字段：username,password
+ * 测试：postman
+ */
+router.post('/login', (req, res) => {
+  let { username, password } = req.body;
+  console.log(req.body);
+  //请求数据库
+  let sql = 'select * from user where username=? and password=?';
+  let arr = [username, password];
+  sqlFn(sql, arr, result => {
+    if (result.length > 0) {
+      let token = jwt.sign(
+        {
+          username: result[0].username,
+          id: result[0].id,
+        },
+        config.jwtSecert,
+        {
+          expiresIn: 20 * 1,
+        }
+      );
+      res.send({
+        status: 200,
+        data: token,
+      });
+    } else {
+      res.send({
+        status: 404,
+        msg: '信息错误',
+      });
+    }
+  });
+});
 
 /**
  * 修改商品
