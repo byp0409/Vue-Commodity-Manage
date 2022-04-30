@@ -14,5 +14,24 @@ const router = new VueRouter({
     return { y: 0 };
   },
 });
-
+router.beforeEach((to, from, next) => {
+  // to and from are both route objects. must call `next`.
+  let token = localStorage.getItem('manage_token');
+  if (token) {
+    // 登录后禁止到登录页面
+    if (to.path === '/login') {
+      // console.log(to.path, from.path);
+      next(from.path);
+    } else {
+      next();
+    }
+  } else {
+    // 没有token跳转到login
+    if (to.path === '/login') {
+      next();
+    } else {
+      next('/login');
+    }
+  }
+});
 export default router;
