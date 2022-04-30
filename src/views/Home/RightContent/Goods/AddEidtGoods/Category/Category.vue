@@ -4,13 +4,13 @@
     <el-dialog title="请选择类目" :visible.sync="centerDialogVisible" width="30%" center>
       <!-- 展示当前选择的类别 -->
       <div class="checked">
-        <span>当前选择的类别：{{ category }}</span>
+        <span>{{ $t('goods.current') }}：{{ category }}</span>
       </div>
       <!-- 类别选择 树形结构 -->
       <el-tree :props="props" :load="loadNode" lazy @node-click="nodeClick"></el-tree>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="centerDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="sendCategoryName">确 定</el-button>
+        <el-button type="primary" @click="sendCategoryName">{{ $t('goods.confirm') }}</el-button>
+        <el-button @click="centerDialogVisible = false">{{ $t('goods.cancel') }}</el-button>
       </span>
     </el-dialog>
   </div>

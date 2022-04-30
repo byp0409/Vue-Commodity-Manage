@@ -20,7 +20,7 @@ export default {
     let editor = this.e;
     editor = new E('#editor');
     // 提示信息
-    editor.config.placeholder = '请输入商品描述';
+    editor.config.placeholder = this.$t('goods.tip2');
     // 取消自动 focus
     editor.config.focus = false;
     // 默认情况下，显示所有菜单

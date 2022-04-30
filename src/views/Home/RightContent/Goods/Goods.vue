@@ -4,45 +4,49 @@
     <!-- 顶部搜索区域 -->
     <header>
       <el-input v-model="input" placeholder="请输入内容" size="medium " @change="search"></el-input>
-      <el-button type="primary" size="small" @click="search" icon="el-icon-search">查询</el-button>
+      <el-button type="primary" size="small" @click="search" icon="el-icon-search">
+        {{ $t('goods.search') }}
+      </el-button>
       <el-button type="primary" size="small" @click="goAddEditGoods" icon="el-icon-plus">
-        添加
+        {{ $t('goods.add') }}
       </el-button>
     </header>
     <div class="table">
       <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark">
         <!-- 具体内容 -->
-        <el-table-column prop="id" label="商品ID" width="110">
+        <el-table-column prop="id" :label="$t('goods.id')" width="110">
           <!-- <template slot-scope="scope">{{ scope.row.date }}</template> -->
         </el-table-column>
-        <el-table-column prop="title" label="商品名称" width="110"></el-table-column>
-        <el-table-column prop="price" label="商品价格" width="90"></el-table-column>
-        <el-table-column prop="num" label="商品数量" width="90"></el-table-column>
+        <el-table-column prop="title" :label="$t('goods.name')" width="110"></el-table-column>
+        <el-table-column prop="price" :label="$t('goods.price')" width="100"></el-table-column>
+        <el-table-column prop="num" :label="$t('goods.num')" width="90"></el-table-column>
         <el-table-column
           prop="category"
-          label="规格类目"
+          :label="$t('goods.category')"
           width="90"
           show-overflow-tooltip
         ></el-table-column>
         <el-table-column
           prop="image"
-          label="商品图片"
+          :label="$t('goods.image')"
           width="150"
           show-overflow-tooltip
         ></el-table-column>
-        <el-table-column prop="sellPoint" label="商品卖点" show-overflow-tooltip></el-table-column>
+        <el-table-column
+          prop="sellPoint"
+          :label="$t('goods.sellPoint')"
+          show-overflow-tooltip
+        ></el-table-column>
         <el-table-column
           prop="descs"
-          label="商品描述"
+          :label="$t('goods.descs')"
           show-overflow-tooltip
-          header-align="center"
         ></el-table-column>
         <!-- 编辑和删除按钮 -->
-        <el-table-column label="操作" width="250" header-align="center">
+        <el-table-column :label="$t('goods.operation')" header-align="center">
           <template slot-scope="scope">
-            <el-button size="mini">查看</el-button>
             <el-button size="mini" @click="handleEdit(scope.$index, scope.row)" icon="el-icon-edit">
-              编辑
+              {{ $t('goods.edit') }}
             </el-button>
             <el-button
               size="mini"
@@ -50,7 +54,7 @@
               @click="handleDelete(scope.$index, scope.row)"
               icon="el-icon-delete"
             >
-              删除
+              {{ $t('goods.delete') }}
             </el-button>
           </template>
         </el-table-column>
@@ -106,9 +110,10 @@ export default {
   methods: {
     // 表单删除按钮
     handleDelete(index, row) {
-      this.$confirm('此操作将永久数据, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('此操作将永久数据, 是否继续?', `${this.$t('goods.tip')}`, {
+        confirmButtonText: this.$t('goods.confirm'),
+        cancelButtonText: this.$t('goods.cancel'),
+        // $t("message.hello")
         type: 'warning',
         showClose: false,
       })
@@ -118,7 +123,7 @@ export default {
             value => {
               this.$message({
                 showClose: true,
-                message: '恭喜你，删除成功！',
+                message: `${this.$t('goods.msg1')}`,
                 center: true,
                 type: 'success',
                 showClose: false,
@@ -129,7 +134,7 @@ export default {
             error => {
               this.$message({
                 showClose: true,
-                message: '删除失败了哦',
+                message: `${this.$t('goods.msg2')}`,
                 center: true,
                 type: 'error',
                 showClose: false,
@@ -140,7 +145,7 @@ export default {
         .catch(() => {
           this.$message({
             type: 'info',
-            message: '已取消删除',
+            message: `${this.$t('goods.msg3')}`,
             center: true,
             showClose: false,
           });
@@ -150,7 +155,7 @@ export default {
     goAddEditGoods() {
       this.$router.replace({
         name: 'addEditGoods',
-        query: { headerName: '添加商品', confirm: '立即创建' },
+        query: { headerName: this.$t('goods.headerName1'), confirm: this.$t('goods.confirm1') },
       });
     },
     // 搜索
@@ -172,7 +177,11 @@ export default {
     handleEdit(index, row) {
       this.$router.replace({
         name: 'addEditGoods',
-        query: { headerName: '编辑商品', confirm: '立即修改', row },
+        query: {
+          headerName: this.$t('goods.headerName2'),
+          confirm: this.$t('goods.confirm2'),
+          row,
+        },
       });
     },
     // 获取商品数据

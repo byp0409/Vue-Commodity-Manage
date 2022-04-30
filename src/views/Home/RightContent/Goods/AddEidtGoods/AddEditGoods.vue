@@ -3,8 +3,12 @@
     <!-- 面包屑 -->
     <div class="bread">
       <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item :to="{ path: '/home/homePage' }" replace>首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/home/goods' }" replace>商品管理</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/home/homePage' }" replace>
+          {{ $t('goods.breadcrumb1') }}
+        </el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/home/goods' }" replace>
+          {{ $t('goods.breadcrumb2') }}
+        </el-breadcrumb-item>
         <el-breadcrumb-item>{{ $route.query.headerName }}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
@@ -17,29 +21,31 @@
         label-width="100px"
         class="demo-ruleForm"
       >
-        <el-form-item label="类目选择" prop="category">
+        <el-form-item :label="$t('goods.categorySelection')" prop="category">
           <!-- 控制弹窗 -->
-          <el-button type="primary" @click="centerDialogVisible">类目选择</el-button>
+          <el-button type="primary" @click="centerDialogVisible">
+            {{ $t('goods.categorySelection') }}
+          </el-button>
           <span class="categoryName" v-show="goodsForm.category">
-            类别：{{ goodsForm.category }}
+            {{ $t('goods.category') }}{{ goodsForm.category }}
           </span>
         </el-form-item>
-        <el-form-item label="商品名称" prop="title">
+        <el-form-item :label="$t('goods.name')" prop="title">
           <el-input v-model="goodsForm.title"></el-input>
         </el-form-item>
-        <el-form-item label="商品价格" prop="price">
+        <el-form-item :label="$t('goods.price')" prop="price">
           <el-input v-model.number="goodsForm.price"></el-input>
         </el-form-item>
-        <el-form-item label="商品数量" prop="num">
+        <el-form-item :label="$t('goods.num')" prop="num">
           <el-input v-model.number="goodsForm.num"></el-input>
         </el-form-item>
-        <el-form-item label="商品卖点" prop="sellPoint">
+        <el-form-item :label="$t('goods.sellPoint')" prop="sellPoint">
           <el-input v-model="goodsForm.sellPoint"></el-input>
         </el-form-item>
-        <el-form-item label="上传图片" prop="image">
+        <el-form-item :label="$t('goods.upload')" prop="image">
           <UpLoadImg @getImgUrl="getImgUrl" ref="upload" />
         </el-form-item>
-        <el-form-item label="商品描述" prop="desc">
+        <el-form-item :label="$t('goods.descs')" prop="desc">
           <!-- 文本编辑 -->
           <Editor @getEditor="getEditor" ref="editor" :desc="goodsForm.desc" />
         </el-form-item>
@@ -47,7 +53,7 @@
           <el-button type="primary" @click="submitForm('ruleForm')">
             {{ $route.query.confirm }}
           </el-button>
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
+          <el-button @click="resetForm('ruleForm')">{{ $t('goods.reset') }}</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -162,7 +168,7 @@ export default {
               .then(
                 value => {
                   this.$message({
-                    message: '恭喜你，添加商品成功',
+                    message: `${this.$t('goods.msg4')}`,
                     center: true,
                     type: 'success',
                     showClose: false,
@@ -171,7 +177,7 @@ export default {
                 },
                 error => {
                   this.$message({
-                    message: '抱歉，添加失败了',
+                    message: `${this.$t('goods.msg5')}`,
                     center: true,
                     type: 'error',
                     showClose: false,
@@ -196,7 +202,7 @@ export default {
               .then(
                 value => {
                   this.$message({
-                    message: '恭喜你，添加商品成功',
+                    message: `${this.$t('goods.msg4')}`,
                     center: true,
                     type: 'success',
                     showClose: false,
@@ -205,7 +211,7 @@ export default {
                 },
                 error => {
                   this.$message({
-                    message: '抱歉，添加失败了',
+                    message: `${this.$t('goods.msg5')}`,
                     center: true,
                     type: 'error',
                     showClose: false,
@@ -215,7 +221,7 @@ export default {
           }
         } else {
           this.$message({
-            message: '要把信息填完整哦',
+            message: `${this.$t('goods.msg6')}`,
             type: 'warning',
             center: true,
             showClose: false,
