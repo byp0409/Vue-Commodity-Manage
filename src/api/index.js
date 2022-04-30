@@ -28,3 +28,7 @@ export const reqDelete = id =>
 // 修改商品信息
 export const modifyGoods = params =>
   request({ url: '/backend/item/updateTbItem', method: 'GET', params });
+
+// 登录
+var qs = require('qs');
+export const reqLogin = data => request.post('/login', qs.stringify(data));
