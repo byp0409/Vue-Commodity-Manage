@@ -10,7 +10,7 @@ const client = mysql.createConnection({
   // port:'3306'
 });
 
-//封装数据库操作语句 sql语句 参数数组arr  callback成功函数结果
+//封装数据库操作语句 sql语句 参数数组arr，用在sql语句中的?占位符里  callback成功函数结果
 function sqlFn(sql, arr, callback) {
   // 数据库连接.query(sql语句,接收的数据,function(){响应结果})
   client.query(sql, arr, function (error, result) {
