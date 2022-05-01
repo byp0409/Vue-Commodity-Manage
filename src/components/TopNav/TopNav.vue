@@ -37,14 +37,15 @@ export default {
   },
   mounted() {
     // 存储一下用户名
-    this.username = localStorage.getItem('username');
+    let userInfo = localStorage.getItem('userInfo');
+    this.username = JSON.parse(userInfo).username;
   },
   methods: {
     // 退出登录
     logout() {
       // 没有退出登录的接口，只销毁token
       localStorage.removeItem('manage_token');
-      localStorage.removeItem('username');
+      localStorage.removeItem('userInfo');
       this.$router.replace('/login');
     },
     // 切换语言
