@@ -1,4 +1,5 @@
 import request from './reqinstance';
+import mockinstance from './mockinstance';
 
 // 已在代理服务器重写路径，直接用简写
 // 搜索商品列表，get请求 search商品关键字
@@ -32,3 +33,9 @@ export const modifyGoods = params =>
 // 登录
 var qs = require('qs');
 export const reqLogin = data => request.post('/login', qs.stringify(data));
+
+// 顶部总数据
+export const reqStatistica = () => mockinstance.get('/statistica');
+
+// 请求统计图
+export const reqChart = () => mockinstance.get('/sellTotal');
